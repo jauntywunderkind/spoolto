@@ -1,0 +1,13 @@
+#!/bin/bash
+
+tmp=$(mktemp)
+file="$1"
+
+trap ctrl_c INT
+ctrl_c(){
+	echo $tmp
+	[ -n "$file" ] && mv $tmp $1
+}
+
+sel-follower | cat - $tmp
+
